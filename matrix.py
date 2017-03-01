@@ -11,11 +11,11 @@ def print_matrix( matrix ):
                     sys.stdout.write(str(matrix[i][j]) + " ")
                 print " "
             else: 
-                print "\nNOT A VALID MATRIX"
+                print "\nNOT A VALID MATRIX A"
                 return
         return
     else:
-        print "\nNOT A VALID MATRIX"
+        print "\nNOT A VALID MATRIX B"
         return
 
 
@@ -45,28 +45,24 @@ def scalar_mult( matrix, s ):
                 for j in range(0, len(matrix[i])):
                     matrix[i][j] = s*matrix[i][j]
             else: 
-                print "\nNOT A VALID MATRIX"
+                print "\nNOT A VALID MATRIX A"
                 return
-        return
+        return matrix
     else:
-        print "\nNOT A VALID MATRIX"
+        print "\nNOT A VALID MATRIX B"
         return
 
 #m1 * m2 -> m2
 def matrix_mult( m1, m2 ):
-    ret = [[]]
     if isinstance(m1, list) and isinstance(m2, list) and isinstance(m1[0], list) and isinstance(m2[0], list) and len(m1) == len(m2[0]):
-        ans = [[0]*len(m1[0])]*len(m2)
-        temp1 = [0]*len(m1)
+        ans = [[None]*len(m1[0]) for lol in range(len(m2))]
+        temp1 = [None]*len(m1)
+        dot = 0
         for i in range(0, len(m1[0])):
             for j in range(0, len(m1)):
                 temp1[j] = m1[j][i]
             for k in range(0, len(m2)):
-                print "NOW POPULATING (" + str(k) + ", " + str(i) + ") with " + str(dot_product(temp1, m2[k]))
                 ans[k][i] = dot_product(temp1, m2[k])
-                print "Printing slot: " + str(ans[k][i])
-            print str(ans[i][i])
-            print_matrix(ans)
         return ans
     else: 
         print "\nCAN'T MULTIPLY THESE MATRICES"
@@ -89,10 +85,10 @@ def new_matrix(rows = 4, cols = 4):
     for c in range( cols ):
         m.append( [] )
         for r in range( rows ):
-            m[c].append( 0 )
+            m[c].append( None )
     return m
 
-
+'''
 a = new_matrix(4, 4)
 b = new_matrix(4, 4)
 a = ident(a)
@@ -102,4 +98,6 @@ print_matrix(b)
 c = matrix_mult(a, b)
 print_matrix(c)
 print str(c[0][0])
-
+a = new_matrix(4,4)
+print str(a)
+'''

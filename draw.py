@@ -3,13 +3,27 @@ from matrix import *
 
 
 def draw_lines( matrix, screen, color ):
-    pass
+    subtract = len(matrix)%2
+    for i in range(0, len(matrix) - subtract, 2):
+        draw_line(matrix[i][0], matrix[i][1], matrix[i+1][0], matrix[i+1][1], screen, color)
+    return
 
 def add_edge( matrix, x0, y0, z0, x1, y1, z1 ):
-    pass
+    matrix = add_point(matrix, x0, y0, z0)
+    matrix = add_point(matrix, x1, y1, z1)
+    return matrix
 
 def add_point( matrix, x, y, z=0 ):
-    pass
+    for i in range(len(matrix)):
+        if (matrix[i][0] == None):
+            matrix[i][0] = x
+            matrix[i][1] = y
+            matrix[i][2] = z
+            matrix[i][3] = 1.0
+            return matrix
+    matrix.append([x, y, z, 1.0])
+    return matrix
+
 
 
 
@@ -38,14 +52,14 @@ def draw_line( x0, y0, x1, y1, screen, color ):
             d = A + B/2
 
             while x < x1:
-                plot(screen, color, x, y)
+                plot(screen, color, int(x), int(y))
                 if d > 0:
                     y+= 1
                     d+= B
                 x+= 1
                 d+= A
             #end octant 1 while
-            plot(screen, color, x1, y1)
+            plot(screen, color, int(x1), int(y1))
         #end octant 1
 
         #octant 8
@@ -53,14 +67,14 @@ def draw_line( x0, y0, x1, y1, screen, color ):
             d = A - B/2
 
             while x < x1:
-                plot(screen, color, x, y)
+                plot(screen, color, int(x), int(y))
                 if d < 0:
                     y-= 1
                     d-= B
                 x+= 1
                 d+= A
             #end octant 8 while
-            plot(screen, color, x1, y1)
+            plot(screen, color, int(x1), int(y1))
         #end octant 8
     #end octants 1 and 8
 
@@ -71,14 +85,14 @@ def draw_line( x0, y0, x1, y1, screen, color ):
             d = A/2 + B
 
             while y < y1:
-                plot(screen, color, x, y)
+                plot(screen, color, int(x), int(y))
                 if d < 0:
                     x+= 1
                     d+= A
                 y+= 1
                 d+= B
             #end octant 2 while
-            plot(screen, color, x1, y1)
+            plot(screen, color, int(x1), int(y1))
         #end octant 2
 
         #octant 7
@@ -86,14 +100,14 @@ def draw_line( x0, y0, x1, y1, screen, color ):
             d = A/2 - B;
 
             while y > y1:
-                plot(screen, color, x, y)
+                plot(screen, color, int(x), int(y))
                 if d > 0:
                     x+= 1
                     d+= A
                 y-= 1
                 d-= B
             #end octant 7 while
-            plot(screen, color, x1, y1)
+            plot(screen, color, int(x1), int(y1))
         #end octant 7
     #end octants 2 and 7
 #end draw_line
